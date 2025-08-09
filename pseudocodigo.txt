@@ -1,0 +1,49 @@
+inicio
+Definir respuesta Como cadena
+
+	Imprimir "====== GESTOR DE NOTAS ACADÉMICAS ======"
+	Imprimir "1. Registrar nuevo curso"
+	Imprimir "2. Mostrar todos los cursos y notas"
+	Imprimir "3. Calcular promedio general"
+	Imprimir "4. Contar cursos aprobados y reprobados"
+	Imprimir "5. Actualizar nota de un curso"
+	Imprimir "6. Eliminar un curso"
+	Leer respuesta
+	si respuesta = "1" Entonces
+		imprimir "Registrar nuevo curso" 
+		imprimir "ingresa el nuevo curso a registrar"
+		FinSi
+		si respuesta = "2" Entonces
+			imprimir "Mostrar todos los cursos y notas" 
+		FinSi
+		Si respuesta = "3" Entonces
+			Imprimir "Calcular promedio general" 
+			
+			Imprimir "Ingresa tu nota1"
+			Leer nota1
+			
+			Imprimir "Ingresa tu nota2"
+			Leer nota2
+			
+			Imprimir "Ingresa tu nota3"
+			Leer nota3
+			
+			Imprimir "Ingresa tu nota4"
+			Leer nota4
+			
+			promedio <- (nota1 + nota2 + nota3 + nota4) / 4
+			
+			Imprimir "El promedio general es: ", promedio
+		FinSi
+		si respuesta = "4" Entonces
+			imprimir "Contar cursos aprobados y reprobados" 
+		FinSi
+		si respuesta = "5" Entonces
+			imprimir "Actualizar nota de un curso" 
+			imprimir "Que curso desea actualizar"
+		FinSi
+		si respuesta = "6" Entonces
+			imprimir "Eliminar un curso" 
+			imprimir "Que curso desea eliminar"
+		FinSi
+fin
