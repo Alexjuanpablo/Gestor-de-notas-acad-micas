@@ -1,4 +1,4 @@
-# Gestor-de-notas-acad-micas
+# Gestor-de-notas-academicas
 
 El proposito de este proyecto, trata de la realización de un gertor de nodas. Cual es el proposito de este getor de notas. su obejivo es de servir como una asistente,
 donde nos ayudara al ingreso de datos de un estudiante, los cursos que lleva, y verficar el promedio de sus notas, entre otras funciones que se le iran agregando en transcurso
