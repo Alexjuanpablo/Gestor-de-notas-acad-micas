@@ -17,24 +17,36 @@ Definir respuesta Como cadena
 			imprimir "Mostrar todos los cursos y notas" 
 		FinSi
 		Si respuesta = "3" Entonces
-			Imprimir "Calcular promedio general" 
 			
-			Imprimir "Ingresa tu nota1"
-			Leer nota1
-			
-			Imprimir "Ingresa tu nota2"
-			Leer nota2
-			
-			Imprimir "Ingresa tu nota3"
-			Leer nota3
-			
-			Imprimir "Ingresa tu nota4"
-			Leer nota4
-			
-			promedio <- (nota1 + nota2 + nota3 + nota4) / 4
-			
-			Imprimir "El promedio general es: ", promedio
-		FinSi
+
+
+
+// Declaración de variables para el promedio de notas 
+
+		Definir Calificaciones Como Real
+		Definir suma, promedio Como Real
+		definir i, n Como Entero
+		
+		Imprimir "cuantas Calificaciones vas a ingresar"
+		Leer  n
+		
+		Dimension Calificaciones[n]
+		
+		suma = 0
+		
+		para i = 1 Hasta n Hacer 
+			Escribir " ingresa la calificación ", i,":"
+			leer Calificaciones[i]
+			suma=suma + Calificaciones[i]
+		FinPara
+		
+		promedio = suma / n
+		Imprimir "El promedio de las notas es:", promedio
+		
+//fin de calculo de promedio
+
+
+
 		si respuesta = "4" Entonces
 			imprimir "Contar cursos aprobados y reprobados" 
 		FinSi
