@@ -33,7 +33,30 @@ def mostrar_cursos():
         for idx, curso in enumerate(cursos, 1):
             print(f"{idx}. {curso['nombre']} - Nota: {curso['nota']}")
 
+#codigo de la opcion 3 para el calculo del promdio
+def calcular_promedio():
+    if not cursos:
+        print("No hay cursos registrados para calcular el promedio.")
+        return
+    total = sum(curso['nota'] for curso in cursos)
+    promedio = total / len(cursos)
+    print(f"El promedio general es: {promedio:.2f}")
 
+#codigo para la opcion 4, verificacion de cursos aprobados y reprobados 
+def cursos_aprobados_reprobados():
+    if not cursos:
+        print("No hay cursos registrados para analizar.")
+        return
+    aprobados = [c for c in cursos if c['nota'] >= 60]
+    reprobados = [c for c in cursos if c['nota'] < 60]
+
+    print(f"\nCursos aprobados ({len(aprobados)}):")
+    for c in aprobados:
+        print(f"- {c['nombre']} (Nota: {c['nota']})")
+
+    print(f"\nCursos reprobados ({len(reprobados)}):")
+    for c in reprobados:
+        print(f"- {c['nombre']} (Nota: {c['nota']})")
 # Programa principal
 menu()
 option = int(input("Ingrese su opción: "))
