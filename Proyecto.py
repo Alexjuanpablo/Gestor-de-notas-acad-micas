@@ -57,6 +57,26 @@ def cursos_aprobados_reprobados():
     print(f"\nCursos reprobados ({len(reprobados)}):")
     for c in reprobados:
         print(f"- {c['nombre']} (Nota: {c['nota']})")
+        
+# codigo para la opcion 5, actualizacion de notas 
+def actualizar_notas():
+    if not cursos:
+        print("No hay cursos registrados para actualizar.")
+        return
+    mostrar_cursos()
+    nombre_curso = input("Ingrese el nombre del curso al que desea actualizar la nota: ").strip()
+    
+    for curso in cursos:
+        if curso['nombre'].lower() == nombre_curso.lower():
+            try:
+                nueva_nota = float(input(f"Ingrese la nueva nota para {curso['nombre']}: "))
+                curso['nota'] = nueva_nota
+                print(f"Nota actualizada correctamente para el curso '{curso['nombre']}'.\n")
+                return
+            except ValueError:
+                print("La nota debe ser un número.")
+                return
+    print(f"No se encontró el curso '{nombre_curso}'. Intente nuevamente.")
 # Programa principal
 menu()
 option = int(input("Ingrese su opción: "))
