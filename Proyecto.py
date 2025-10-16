@@ -188,12 +188,11 @@ def buscar_curso_por_nombre_binaria():
 
 #opcion 11 simular cola de solicitudes de revisión
 
-from collections import deque
 
-# Cola para solicitudes de revisión
-cola_solicitudes = deque()
+# Cola para solicitudes de revisión (usando lista básica)
+cola_solicitudes = []
 
-def simular_cola_solicitudes():
+ def simular_cola_solicitudes():
     while True:
         print("\n=== Cola de solicitudes de revisión ===")
         print("[1] Agregar solicitud")
@@ -210,7 +209,7 @@ def simular_cola_solicitudes():
         
         elif opcion_cola == '2':
             if cola_solicitudes:
-                atendida = cola_solicitudes.popleft()
+                atendida = cola_solicitudes.pop(0)  # elimina el primer elemento (como una cola)
                 print(f"Solicitud '{atendida}' procesada y eliminada de la cola.")
             else:
                 print("No hay solicitudes para procesar.")
@@ -228,7 +227,7 @@ def simular_cola_solicitudes():
             break
         
         else:
-            print("Opción inválida. Intente de nuevo.")
+            print("Opción inválida. Intente de nuevo.")
 
 # opcion 12 mostrar historial de cambios (pilas)
 # Pila para historial de cambios
