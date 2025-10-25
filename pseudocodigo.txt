@@ -1,61 +1,272 @@
-inicio
-Definir respuesta Como cadena
+Inicio
 
-	Imprimir "====== GESTOR DE NOTAS ACADÉMICAS ======"
-	Imprimir "1. Registrar nuevo curso"
-	Imprimir "2. Mostrar todos los cursos y notas"
-	Imprimir "3. Calcular promedio general"
-	Imprimir "4. Contar cursos aprobados y reprobados"
-	Imprimir "5. Actualizar nota de un curso"
-	Imprimir "6. Eliminar un curso"
-	Leer respuesta
-	si respuesta = "1" Entonces
-		imprimir "Registrar nuevo curso" 
-		imprimir "ingresa el nuevo curso a registrar"
-		FinSi
-		si respuesta = "2" Entonces
-			imprimir "Mostrar todos los cursos y notas" 
-		FinSi
-		Si respuesta = "3" Entonces
-			
+    Definir cursos Como Lista
+    Definir cola_solicitudes Como Lista
+    Definir historial_cambios Como Lista
+    Definir opcion, opcion_cola Como Entero
 
+    Repetir
+        Escribir "==== MENÚ PRINCIPAL ===="
+        Escribir "[1] Registrar nuevo curso"
+        Escribir "[2] Mostrar cursos y notas"
+        Escribir "[3] Calcular promedio general"
+        Escribir "[4] Cursos aprobados y reprobados"
+        Escribir "[5] Buscar curso por nombre (búsqueda lineal)"
+        Escribir "[6] Actualizar nota de un curso"
+        Escribir "[7] Eliminar curso"
+        Escribir "[8] Ordenar cursos por notas (burbuja)"
+        Escribir "[9] Ordenar cursos por nombres (inserción)"
+        Escribir "[10] Buscar curso por nombre (búsqueda binaria)"
+        Escribir "[11] Simular cola de solicitudes"
+        Escribir "[12] Mostrar historial de cambios"
+        Escribir "[0] Salir"
+        Escribir "Seleccione una opción:"
+        Leer opcion
 
+        Segun opcion Hacer
 
-// Declaración de variables para el promedio de notas 
+            Caso 1:
+                Repetir
+                    Escribir "Ingrese el nombre del curso (o 'salir' para volver al menú):"
+                    Leer nombre
+                    Si nombre = "salir" Entonces
+                        Salir
+                    FinSi
+                    Escribir "Ingrese la nota para ", nombre, ":"
+                    Leer nota
+                    Agregar {"nombre": nombre, "nota": nota} a cursos
+                    Escribir "Curso agregado correctamente."
+                Hasta Que nombre = "salir"
+            FinCaso
 
-		Definir Calificaciones Como Real
-		Definir suma, promedio Como Real
-		definir i, n Como Entero
-		
-		Imprimir "cuantas Calificaciones vas a ingresar"
-		Leer  n
-		
-		Dimension Calificaciones[n]
-		
-		suma = 0
-		
-		para i = 1 Hasta n Hacer 
-			Escribir " ingresa la calificación ", i,":"
-			leer Calificaciones[i]
-			suma=suma + Calificaciones[i]
-		FinPara
-		
-		promedio = suma / n
-		Imprimir "El promedio de las notas es:", promedio
-		
-//fin de calculo de promedio
+            Caso 2:
+                Si cursos está vacío Entonces
+                    Escribir "No hay cursos registrados."
+                Sino
+                    Para i <- 1 Hasta longitud(cursos) Hacer
+                        Escribir i, ". ", cursos[i].nombre, " - Nota: ", cursos[i].nota
+                    FinPara
+                FinSi
+            FinCaso
 
+            Caso 3:
+                Si cursos está vacío Entonces
+                    Escribir "No hay cursos registrados."
+                Sino
+                    total <- 0
+                    Para cada curso en cursos Hacer
+                        total <- total + curso.nota
+                    FinPara
+                    promedio <- total / longitud(cursos)
+                    Escribir "El promedio general es: ", promedio
+                FinSi
+            FinCaso
 
+            Caso 4:
+                Si cursos está vacío Entonces
+                    Escribir "No hay cursos registrados."
+                Sino
+                    aprobados <- []
+                    reprobados <- []
+                    Para cada curso en cursos Hacer
+                        Si curso.nota >= 60 Entonces
+                            Agregar curso a aprobados
+                        Sino
+                            Agregar curso a reprobados
+                        FinSi
+                    FinPara
+                    Escribir "Cursos aprobados:"
+                    Para cada c en aprobados Hacer
+                        Escribir "- ", c.nombre, " (Nota: ", c.nota, ")"
+                    FinPara
+                    Escribir "Cursos reprobados:"
+                    Para cada c en reprobados Hacer
+                        Escribir "- ", c.nombre, " (Nota: ", c.nota, ")"
+                    FinPara
+                FinSi
+            FinCaso
 
-		si respuesta = "4" Entonces
-			imprimir "Contar cursos aprobados y reprobados" 
-		FinSi
-		si respuesta = "5" Entonces
-			imprimir "Actualizar nota de un curso" 
-			imprimir "Que curso desea actualizar"
-		FinSi
-		si respuesta = "6" Entonces
-			imprimir "Eliminar un curso" 
-			imprimir "Que curso desea eliminar"
-		FinSi
-fin
+            Caso 5:
+                Si cursos está vacío Entonces
+                    Escribir "No hay cursos registrados."
+                Sino
+                    Escribir "Ingrese el nombre del curso a buscar:"
+                    Leer nombre_busqueda
+                    encontrado <- Falso
+                    Para cada curso en cursos Hacer
+                        Si curso.nombre = nombre_busqueda Entonces
+                            Escribir "Curso encontrado: ", curso.nombre, " - Nota: ", curso.nota
+                            encontrado <- Verdadero
+                        FinSi
+                    FinPara
+                    Si encontrado = Falso Entonces
+                        Escribir "Curso no encontrado."
+                    FinSi
+                FinSi
+            FinCaso
+
+            Caso 6:
+                Si cursos está vacío Entonces
+                    Escribir "No hay cursos registrados."
+                Sino
+                    Escribir "Ingrese el nombre del curso al que desea actualizar la nota:"
+                    Leer nombre_curso
+                    encontrado <- Falso
+                    Para cada curso en cursos Hacer
+                        Si curso.nombre = nombre_curso Entonces
+                            Escribir "Ingrese la nueva nota:"
+                            Leer nueva_nota
+                            cambio <- "Cambio en " + curso.nombre + ": " + curso.nota + " -> " + nueva_nota
+                            Agregar cambio a historial_cambios
+                            curso.nota <- nueva_nota
+                            Escribir "Nota actualizada correctamente."
+                            encontrado <- Verdadero
+                        FinSi
+                    FinPara
+                    Si encontrado = Falso Entonces
+                        Escribir "Curso no encontrado."
+                    FinSi
+                FinSi
+            FinCaso
+
+            Caso 7:
+                Si cursos está vacío Entonces
+                    Escribir "No hay cursos registrados."
+                Sino
+                    Escribir "Ingrese el nombre del curso que desea eliminar:"
+                    Leer nombre_curso
+                    Para cada curso en cursos Hacer
+                        Si curso.nombre = nombre_curso Entonces
+                            Eliminar curso de cursos
+                            Escribir "Curso eliminado correctamente."
+                        FinSi
+                    FinPara
+                FinSi
+            FinCaso
+
+            Caso 8:
+                Si cursos está vacío Entonces
+                    Escribir "No hay cursos registrados."
+                Sino
+                    Para i <- 0 Hasta longitud(cursos) - 2 Hacer
+                        Para j <- 0 Hasta longitud(cursos) - i - 2 Hacer
+                            Si cursos[j].nota > cursos[j+1].nota Entonces
+                                Intercambiar cursos[j] con cursos[j+1]
+                            FinSi
+                        FinPara
+                    FinPara
+                    Escribir "Cursos ordenados por notas:"
+                    Para i <- 1 Hasta longitud(cursos) Hacer
+                        Escribir cursos[i].nombre, " - ", cursos[i].nota
+                    FinPara
+                FinSi
+            FinCaso
+
+            Caso 9:
+                Si cursos está vacío Entonces
+                    Escribir "No hay cursos registrados."
+                Sino
+                    Para i <- 1 Hasta longitud(cursos)-1 Hacer
+                        key <- cursos[i]
+                        j <- i - 1
+                        Mientras j >= 0 Y cursos[j].nombre > key.nombre Hacer
+                            cursos[j+1] <- cursos[j]
+                            j <- j - 1
+                        FinMientras
+                        cursos[j+1] <- key
+                    FinPara
+                    Escribir "Cursos ordenados por nombre:"
+                    Para i <- 1 Hasta longitud(cursos) Hacer
+                        Escribir cursos[i].nombre, " - ", cursos[i].nota
+                    FinPara
+                FinSi
+            FinCaso
+
+            Caso 10:
+                Si cursos está vacío Entonces
+                    Escribir "No hay cursos registrados."
+                Sino
+                    Ordenar cursos por nombre
+                    Escribir "Ingrese el nombre del curso a buscar:"
+                    Leer nombre_busqueda
+                    izquierda <- 0
+                    derecha <- longitud(cursos) - 1
+                    encontrado <- Falso
+                    Mientras izquierda <= derecha Y encontrado = Falso Hacer
+                        medio <- (izquierda + derecha) / 2
+                        Si cursos[medio].nombre = nombre_busqueda Entonces
+                            Escribir "Curso encontrado: ", cursos[medio].nombre, " - ", cursos[medio].nota
+                            encontrado <- Verdadero
+                        Sino Si cursos[medio].nombre < nombre_busqueda Entonces
+                            izquierda <- medio + 1
+                        Sino
+                            derecha <- medio - 1
+                        FinSi
+                    FinMientras
+                    Si encontrado = Falso Entonces
+                        Escribir "Curso no encontrado."
+                    FinSi
+                FinSi
+            FinCaso
+
+            Caso 11:
+                Repetir
+                    Escribir "=== COLA DE SOLICITUDES ==="
+                    Escribir "[1] Agregar solicitud"
+                    Escribir "[2] Procesar solicitud"
+                    Escribir "[3] Mostrar solicitudes pendientes"
+                    Escribir "[0] Volver al menú"
+                    Leer opcion_cola
+                    Segun opcion_cola Hacer
+                        Caso 1:
+                            Escribir "Ingrese nombre del curso o estudiante:"
+                            Leer solicitud
+                            Agregar solicitud a cola_solicitudes
+                        FinCaso
+                        Caso 2:
+                            Si cola_solicitudes no está vacía Entonces
+                                solicitud <- Quitar primer elemento de cola_solicitudes
+                                Escribir "Solicitud procesada: ", solicitud
+                            Sino
+                                Escribir "No hay solicitudes para procesar."
+                            FinSi
+                        FinCaso
+                        Caso 3:
+                            Si cola_solicitudes está vacía Entonces
+                                Escribir "No hay solicitudes pendientes."
+                            Sino
+                                Para i <- 1 Hasta longitud(cola_solicitudes) Hacer
+                                    Escribir i, ". ", cola_solicitudes[i]
+                                FinPara
+                            FinSi
+                        FinCaso
+                        Caso 0:
+                            Salir
+                        FinCaso
+                        De Otro Modo:
+                            Escribir "Opción inválida."
+                    FinSegun
+                Hasta Que opcion_cola = 0
+            FinCaso
+
+            Caso 12:
+                Si historial_cambios está vacío Entonces
+                    Escribir "No hay historial de cambios."
+                Sino
+                    Para i <- longitud(historial_cambios) Hasta 1 Con Paso -1 Hacer
+                        Escribir historial_cambios[i]
+                    FinPara
+                FinSi
+            FinCaso
+
+            Caso 0:
+                Escribir "Gracias por usar el programa gestor de notas."
+            FinCaso
+
+            De Otro Modo:
+                Escribir "Opción inválida."
+        FinSegun
+
+    Hasta Que opcion = 0
+
+Fin
