@@ -11,7 +11,8 @@ este lenguaje de programación y comprender muchos otros)
 
 
 
-Reflexion personal
+Reflexion personal.
+
 A:Que aprendiste?
 En lo personal, muchas cosas, aun que me costo mucho ya que tube que investigar, ver tutoriales en you tube y buscar metodos para poder realizar los ejercicios, aun que no fue facil, quiero aprender a programar mejor, talvez llegar a un 5% mas, ya que hasta ahora talvez sepa menos del 1%.
 
